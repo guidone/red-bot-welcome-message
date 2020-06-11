@@ -1,7 +1,7 @@
 /*!
- * Name: welcome-message
- * Id: welcome-message
- * Version: 0.1.0
+ * Name: -welcome-message
+ * Id: -welcome-message
+ * Version: 1.0.0
  * Description: Show a welcome message every time the user joins the chatbot
  * Author: Guido Bellomo (https://github.com/guidone)
  * Repository: http://red-bot.io
