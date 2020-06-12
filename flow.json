@@ -1,0 +1,161 @@
+[
+  {
+      "id": "4d047d96.2252d4",
+      "type": "subflow",
+      "name": "Welcome",
+      "info": "Show a welcome message every time the user joins the chatbot\n\n**Version:** _1.0.1_\n\n**URL:** [GitHub](https://github.com/guidone/red-bot-welcome-message)",
+      "category": "RedBot Flows",
+      "in": [
+          {
+              "x": 100,
+              "y": 160,
+              "wires": [
+                  {
+                      "id": "ab25c865.9be2d8"
+                  }
+              ]
+          }
+      ],
+      "out": [
+          {
+              "x": 1160,
+              "y": 140,
+              "wires": [
+                  {
+                      "id": "c9b0158b.a20598",
+                      "port": 0
+                  }
+              ]
+          },
+          {
+              "x": 460,
+              "y": 260,
+              "wires": [
+                  {
+                      "id": "ab25c865.9be2d8",
+                      "port": 2
+                  }
+              ]
+          }
+      ],
+      "env": [],
+      "color": "#ff6633",
+      "outputLabels": [
+          "To Senders",
+          "Pass Through"
+      ],
+      "icon": "font-awesome/fa-user-plus"
+  },
+  {
+      "id": "ab25c865.9be2d8",
+      "type": "chatbot-rules",
+      "z": "4d047d96.2252d4",
+      "name": "",
+      "rules": [
+          {
+              "type": "messageEvent",
+              "event": "new-user"
+          },
+          {
+              "type": "command",
+              "command": "/start"
+          },
+          {
+              "type": "catchAll"
+          }
+      ],
+      "outputs": 3,
+      "x": 250,
+      "y": 160,
+      "wires": [
+          [
+              "a28b8af6.e95238"
+          ],
+          [
+              "a28b8af6.e95238"
+          ],
+          []
+      ]
+  },
+  {
+      "id": "cb3955ad.098198",
+      "type": "mc-configuration",
+      "z": "4d047d96.2252d4",
+      "namespace": "welcome",
+      "debug": true,
+      "x": 200,
+      "y": 320,
+      "wires": [
+          []
+      ]
+  },
+  {
+      "id": "a28b8af6.e95238",
+      "type": "mc-content",
+      "z": "4d047d96.2252d4",
+      "query": "{{global.welcome_page}}",
+      "language": "",
+      "failbackLanguage": "en",
+      "chain": false,
+      "x": 570,
+      "y": 140,
+      "wires": [
+          [
+              "9dbe7ff5.62763"
+          ],
+          [
+              "ae8e438e.cac2"
+          ]
+      ]
+  },
+  {
+      "id": "ae8e438e.cac2",
+      "type": "function",
+      "z": "4d047d96.2252d4",
+      "name": "Error",
+      "func": "node.error('Missing \"page\" in \"Welcome Message\" plugin.');\nreturn msg;",
+      "outputs": 0,
+      "noerr": 0,
+      "x": 830,
+      "y": 200,
+      "wires": []
+  },
+  {
+      "id": "c9b0158b.a20598",
+      "type": "chatbot-params",
+      "z": "4d047d96.2252d4",
+      "name": "",
+      "params": [
+          {
+              "platform": "telegram",
+              "name": "parseMode",
+              "value": "Markdown"
+          }
+      ],
+      "outputs": 1,
+      "x": 1040,
+      "y": 140,
+      "wires": [
+          []
+      ]
+  },
+  {
+      "id": "9dbe7ff5.62763",
+      "type": "chatbot-message",
+      "z": "4d047d96.2252d4",
+      "name": "",
+      "message": [
+          {
+              "message": "{{payload.body}}"
+          }
+      ],
+      "language": "none",
+      "x": 850,
+      "y": 140,
+      "wires": [
+          [
+              "c9b0158b.a20598"
+          ]
+      ]
+  }
+]
